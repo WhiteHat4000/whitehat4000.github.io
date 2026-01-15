@@ -415,6 +415,16 @@ tr:nth-child(even) {
   margin-bottom: 30px;
 }
 
+.article-body video {
+  max-width: 100%;          /* 親要素の100%（.article-bodyの最大幅720pxに制限される） */
+  width: 100%;              /* 実際の幅を親に合わせる */
+  height: auto;             /* アスペクト比を維持 */
+  border: 2px solid #333;   /* 枠線 */
+  border-radius: 4px;       /* 角の丸み（オプション） */
+  display: block;           /* <p>内のインライン表示を回避 */
+  margin: 15px 0;           /* 上下の余白 */
+}
+
 .home-link {
   text-align: center;
 }
