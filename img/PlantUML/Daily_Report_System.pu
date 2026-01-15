@@ -1,0 +1,82 @@
+@startuml
+
+'各種表示設定
+skin rose
+skinparam responseMessageBelowArrow true
+autonumber
+!pragma sequenceMessageSpan true
+
+header Daily_Report_System.pu
+footer Page %page% of %lastpage%
+
+title 売上データの定期配信
+
+note across
+	前提条件
+	実行タイミング：営業日の既定時間に自動実行
+	記載省略部1：各種ログ取得処理部と(異常調査用)中間ファイルの生成部
+	記載省略部2：内部的なエラーハンドリング部
+end note
+
+'box "社内" #WhiteSmoke
+'end box
+participant 実行用PC as ClientPC
+participant "グループウェアサーバ(2種)" as GroupwareServer
+actor 社員 as エンドユーザー
+database DBサーバ as DBServer
+
+== データの取得 ==
+note over ClientPC, GroupwareServer: 下記1と4の処理はwebスクレイピング(ブラウザ自動操作)
+
+loop 複数回実行
+	ClientPC -> GroupwareServer : スクレイピング対象の操作
+	activate ClientPC
+	activate GroupwareServer
+	ClientPC <-- GroupwareServer : htmlデータ
+	deactivate GroupwareServer
+
+	ClientPC -> ClientPC : スクレイピング対象の存在確認
+	opt スクレイピング対象が存在しない
+		ref over ClientPC: エラーメールを送信して処理を終了
+	end
+end
+note right
+	ログイン処理
+end note
+
+loop 必要種類数分
+	ClientPC-> GroupwareServer : 社員名簿・売上データの抽出操作\n(リトライ有)
+	activate GroupwareServer
+	ClientPC <-- GroupwareServer : csvファイル
+	deactivate GroupwareServer
+	ClientPC -> ClientPC : csvファイルの存在確認
+	alt csvファイルが存在する
+		ClientPC -> ClientPC : csvファイル名変更
+	else csvファイルが存在しない
+		ref over ClientPC: エラーメールを送信して処理を終了
+	end
+end
+note right
+	データ抽出
+end note
+
+note over ClientPC, GroupwareServer: ログイン処理とデータ抽出を\nもう1種のグループウェアサーバに対しても実行する。
+
+== データの加工 ==
+ClientPC -> ClientPC : グループウェアサーバ(2種)から取得した各種ファイルをマージ\n社員名簿は名寄せ
+ClientPC -> ClientPC : 各種計算(欠損値補正 → 整形 → 計算)
+ClientPC -> ClientPC : Excel化 → Excelの体裁修正
+ClientPC -> ClientPC : グラフデータの作成 → グラフファイルを出力
+
+== メール送信 ==
+ClientPC -> ClientPC : メールデータの構築
+ClientPC -> エンドユーザー : メール送信
+
+== DB書込 ==
+ClientPC -> DBServer : 売上データを書込
+activate DBServer
+ClientPC <-- DBServer : 書込成否
+deactivate DBServer
+deactivate ClientPC
+
+@enduml

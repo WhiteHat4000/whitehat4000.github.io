@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <meta property='og:type' content='website'>
+  <meta property='og:title' content='SE・PG Toru Akahoshi ポートフォリオ'>
+  <meta property='og:url' content='URLが入る'>
+  <meta property='og:description' content='Toru Akahoshiのポートフォリオサイト'>
+  <meta property="og:image" content="../img/ogp.png">
+  <meta name="description" content="Toru Akahoshiのポートフォリオサイト" />
+  <title>Toru Akahoshi ポートフォリオ</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="../css/ress.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="../css/style.css" media="all" rel="stylesheet" type="text/css" />
+  <link rel="shortcut icon" href="../img/favicon.ico" />
+  <link rel=”canonical” href=”URLが入る” />
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <!-- header -->
+    <header class="header ">
+      <div class="container">
+        <h1 class="header-logo">
+          <a href="..">Toru Akahoshi</a>
+        </h1>
+        <nav class="gnav">
+          <ul class="gnav-list">
+            <li class="gnav-item"><a href="../#works">WORKS</a></li>
+            <li class="gnav-item"><a href="../#skill">SKILL</a></li>
+            <li class="gnav-item"><a href="../#about">ABOUT</a></li>
+            <!-- <li class="gnav-item"><a href="./#contact">CONTACT</a></li> -->
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- /header -->
+
+    <main class="content">
+
+      <article class="article">
+        <div class="article-container">
+          <h2 class="article-title">日々売上報告システム</h2>
+          <div class="article-body">
+            <h3>システム概要</h3>
+            <p>
+              グループウェア上の情報をwebスクレイピングで抽出、<br>
+              集計後、Excelとグラフ画像を作成し、社内DBに値を保存。<br>
+              合わせて社員へメールにて配布。
+            </p>
+            <h3>システム概要図</h3>
+            <p>
+              <img src="../img/SalesReportSystem.png" alt="">
+            </p>
+            <h3>担当工程</h3>
+            <p>基本設計～リリース～保守の全工程。<br>
+              グループウェア上の入力・集計フォームの作成・保守。</p>
+            <h3>システムの目的</h3>
+            <p>グループウェアに入力された日報情報を集計・可視化し、<br>
+              管理職・経営層が迅速な営業判断を行える様にする。</p>
+            <h3>ターゲット</h3>
+            <p>経営層を含めたパート以外の全社員。</p>
+            <h3>苦労した点</h3>
+            <p>
+              1から独学でPython3と各種ライブラリの使用方法を覚えた事。<br>
+            </p>
+            <p>
+              営業部からの要望が五月雨式かつ短納期な依頼が多かったため、<br>
+              こまめにコミュニケーションを取りリスクヘッジを行った事。<br>
+            </p>
+            <p>
+              新規に導入されたグループウェアの動作検証と並行しながらの開発だったため、<br>手探り状態が長く続いた事、等々<br>
+            </p>
+            <h3>良かった点</h3>
+            <p>
+              営業部の皆が毎日定時付近に行っていた集計時間(約15分×部署数×人数)が、<br>
+              大幅に減った事で営業判断や部下への指導等に使える時間が増えた事。
+            </p>
+
+          </div>
+          <div class="home-link">
+            <a href="../#works">Works一覧へ</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="page-top" id="js-page-top">
+        <span class="material-icons-outlined">expand_less</span>
+      </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="copyright">&copy;Toru Akahoshi</div>
+    </footer>
+    <!-- /footer -->
+
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type='text/javascript' src="js/script.js"></script>
+</body>
+</html>
